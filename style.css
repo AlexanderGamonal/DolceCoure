@@ -71,6 +71,12 @@ body {
   color: var(--primary-color);
 }
 
+.menu-toggle {
+  display: none; /* Oculta el botón en pantallas grandes */
+  font-size: 28px;
+  cursor: pointer;
+}
+
 .hero {
   position: relative;
   width: 100%; /* Ancho máximo del slider */
@@ -79,17 +85,39 @@ body {
   overflow: hidden; /* Oculta el contenido que desborda */
 }
 
+.hero-content {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: var(--text-color);
+  width: 50%;
+  padding: 2rem;
+  margin: auto;
+}
+
+.hero-title {
+  background-color: rgb(255, 255, 255, 0.6);
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  font-weight: 300;
+}
+
 .slides {
   display: flex; /* Muestra las imágenes en fila */
   transition: transform 0.5s ease; /* Transición suave al cambiar de imagen */
 }
 
 .slide {
-  min-width: 100%; /* Cada slide ocupa el 100% del contenedor */
+  min-width: 100%;
+  margin: auto;
 }
 
 .slide img {
-  width: 100%; /* Las imágenes son responsivas */
+  width: 100%;
+  height: 700px; /* Las imágenes son responsivas */
+  object-fit: cover;
 }
 
 input[type="radio"] {
@@ -135,24 +163,6 @@ input[type="radio"] {
 
 .navigation label:hover {
   background-color: #717171; /* Color al pasar el cursor */
-}
-
-.hero-content {
-  position: absolute;
-  top: 70%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  color: var(--text-color);
-  width: 50%;
-  padding: 2rem;
-}
-
-.hero-title {
-  background-color: rgb(255, 255, 255, 0.6);
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  font-weight: 300;
 }
 
 .order-button {
@@ -333,34 +343,6 @@ input[type="radio"] {
   margin: 0 auto;
 }
 
-@media (max-width: 768px) {
-  .nav-links {
-    display: none;
-  }
-
-  .hero-title {
-    font-size: 2rem;
-  }
-
-  .about-container,
-  .footer-container {
-    grid-template-columns: 1fr;
-  }
-
-  .about-card {
-    margin-bottom: 1rem;
-  }
-
-  .history-container,
-  .vision-mission-container {
-    grid-template-columns: 1fr;
-  }
-
-  .history-image {
-    height: 300px;
-  }
-}
-
 .footer {
   background-color: var(--primary-color);
   color: white;
@@ -402,20 +384,80 @@ input[type="radio"] {
 }
 
 @media (max-width: 768px) {
+  .menu-toggle {
+    display: block; /* Muestra el botón en pantallas pequeñas */
+  }
+
   .nav-links {
-    display: none;
+    display: none; /* Oculta el menú por defecto */
+    flex-direction: column; /* Cambia a columna en pantallas pequeñas */
+    position: absolute; /* Posiciona el menú */
+    top: 60px; /* Ajustar según la altura del header */
+    left: 0;
+    right: 0;
+    background-color: #333; /* Fondo del menú desplegable */
+    z-index: 1000; /* Asegura que esté por encima de otros elementos */
+    padding: 10px 0; /* Espaciado superior e inferior del menú */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Sombra para darle profundidad */
+    border-radius: 5px; /* Bordes redondeados opcionales */
+  }
+
+  .nav-links.active {
+    display: flex; /* Muestra el menú cuando está activo */
+  }
+
+  .nav-links a {
+    margin-left: 0; /* Elimina margen en pantallas pequeñas */
+    padding: 10px 20px; /* Espaciado interno para los elementos del menú */
+    border-bottom: 1px solid #444; /* Línea separadora entre opciones */
+    width: calc(100% - 40px); /* Ajusta el ancho considerando el padding */
+    text-align: center; /* Centra el texto de los enlaces */
+  }
+
+  .nav-links a:last-child {
+    border-bottom: none; /* Elimina la línea del último elemento */
+  }
+
+  .hero-content {
+    width: 90%; /* Hacer que el contenido hero ocupe más espacio en móviles */
+    padding: 1rem; /* Ajustar el padding */
   }
 
   .hero-title {
     font-size: 2rem;
   }
 
-  .about-container,
-  .footer-container {
-    grid-template-columns: 1fr;
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .product-card {
+    margin-bottom: 0.5rem;
+  }
+
+  .product-name {
+    font-size: 1rem;
   }
 
   .about-card {
     margin-bottom: 1rem;
+  }
+  .history-container,
+  .vision-mission-container {
+    grid-template-columns: 1fr;
+  }
+
+  .history-image {
+    height: 300px;
+  }
+
+  .products-section {
+    margin-bottom: 20rem;
+  }
+
+  .about-container,
+  .footer-container {
+    grid-template-columns: 1fr;
   }
 }
